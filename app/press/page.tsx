@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const shots = [
   { file: "race-radio-decision", label: "Race — the engineer offers a timed trade" },
   { file: "race-director", label: "Race — an incident telegraphed a lap out" },
-  { file: "race-pitwindow", label: "Race — mid-race, pit window open" },
-  { file: "race-lap1", label: "Race — lights out" },
+  { file: "race-pitwindow", label: "Race — an engine window offered on lap 46" },
+  { file: "race-lap1", label: "Race — the opening laps, field still packed" },
   { file: "weather-radar", label: "Race — the Met Radar" },
   { file: "setup-preRace", label: "Pre-race — circuit and setup" },
   { file: "qualifying-plan", label: "Qualifying — planning a segment" },
