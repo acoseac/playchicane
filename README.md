@@ -4,7 +4,9 @@ The public website for **Chicane: Racing Manager**, an iOS racing-team managemen
 The game itself lives in a separate repository; this repo is only the marketing site,
 the privacy policy, the support page and the press kit.
 
-Static Next.js, exported to plain files, deployed on Vercel.
+Static Next.js, exported to plain files, deployed on Vercel. Pushing to `main` deploys to
+production at [playchicane.com](https://playchicane.com); `vercel deploy --prod` still works if you
+need to ship without a commit.
 
 ## Run it
 
