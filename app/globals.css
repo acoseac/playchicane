@@ -1,0 +1,198 @@
+/* ---------------------------------------------------------------
+   Chicane — site styles.
+   Palette lifted from the app's Tokens.swift so the site and the
+   game are the same object. Don't invent colours here; add them
+   there first.
+   --------------------------------------------------------------- */
+
+:root {
+  --bg: #0a0a0c;
+  --bg-deep: #050506;
+  --surface: #141417;
+  --surface-raised: #1c1c21;
+  --line: #26262c;
+  --text: #f4f4f6;
+  --text-dim: #9b9ba4;
+  --text-faint: #6a6a74;
+
+  --accent: #33b8ff;      /* Tokens.Palette.accent */
+  --player: #ffc733;      /* Tokens.Palette.player */
+  --danger: #ff5952;      /* Tokens.Palette.danger */
+  --good: #4dd972;        /* Tokens.Palette.good */
+  --wet: #739eff;
+
+  --soft: #f04347;        /* tyre compounds */
+  --medium: #fad138;
+  --hard: #e0e0e0;
+
+  --display: var(--font-archivo, "Archivo"), "Helvetica Neue", Arial, sans-serif;
+  --body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+
+  --page: 1120px;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+::selection { background: var(--accent); color: #04141f; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- The masthead voice: black, condensed, leaning forward.
+       Mirrors Font.masthead(_:) in Comic.swift. ------------------ */
+.masthead {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 78, "wght" 900;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.eyebrow {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 88, "wght" 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+.eyebrow.dim { color: var(--text-faint); }
+
+.mono { font-family: var(--mono); font-size: 0.92em; }
+
+/* --- Layout ------------------------------------------------------ */
+.wrap { max-width: var(--page); margin: 0 auto; padding: 0 24px; }
+/* Prose column. Same outer container as .wrap so every page shares one
+   left gutter — a heading indented differently from the text under it
+   reads as a mistake, not as a design. */
+.narrow { max-width: var(--page); margin: 0 auto; padding: 0 24px; }
+.narrow > * { max-width: 720px; }
+
+section { padding: 96px 0; }
+@media (max-width: 700px) { section { padding: 64px 0; } }
+
+.rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+/* --- Halftone + speed lines, the house texture ------------------- */
+.halftone {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--dot, #ffffff14) 1px, transparent 1px);
+  background-size: 7px 7px;
+  -webkit-mask-image: linear-gradient(160deg, #000 0%, transparent 55%);
+  mask-image: linear-gradient(160deg, #000 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* --- Buttons ----------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: rgba(51, 184, 255, 0.14);
+  color: var(--text);
+  font-family: var(--display);
+  font-variation-settings: "wdth" 90, "wght" 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+.btn:hover { background: rgba(51, 184, 255, 0.24); text-decoration: none; transform: translateY(-1px); }
+.btn.ghost { border-color: var(--line); background: transparent; }
+.btn.ghost:hover { border-color: var(--text-faint); background: #ffffff08; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 15px;
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+.badge .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--player);
+  box-shadow: 0 0 0 3px rgba(255, 199, 51, 0.16);
+}
+
+/* --- Cards ------------------------------------------------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.card h3 {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 85, "wght" 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.01em;
+  margin: 0 0 10px;
+}
+.card p { color: var(--text-dim); margin: 0; font-size: 0.98rem; }
+
+.grid { display: grid; gap: 18px; }
+.grid.two { grid-template-columns: repeat(2, 1fr); }
+.grid.three { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) { .grid.three { grid-template-columns: 1fr; } .grid.two { grid-template-columns: 1fr; } }
+
+/* --- Prose (privacy, support) ------------------------------------ */
+.prose h2 {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 82, "wght" 800;
+  font-size: 1.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  margin: 52px 0 14px;
+}
+.prose h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 32px 0 8px;
+}
+.prose p, .prose li { color: var(--text-dim); }
+.prose li { margin-bottom: 8px; }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose ul { padding-left: 22px; }
+.prose > p:first-of-type { font-size: 1.12rem; color: var(--text); }
