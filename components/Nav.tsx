@@ -1,9 +1,13 @@
 import Link from "next/link";
+import { seriesEnabled, seriesUnlisted } from "@/lib/series";
 
 const links = [
   { href: "/how-it-plays/", label: "How it plays" },
   { href: "/press/", label: "Press kit" },
   { href: "/support/", label: "Support" },
+  // Last on purpose: this nav drops its first link under 430px, and losing
+  // "How it plays" on a phone would be the wrong thing to lose.
+  ...(seriesEnabled && !seriesUnlisted ? [{ href: "/series/", label: "Same Sky" }] : []),
 ];
 
 export default function Nav() {

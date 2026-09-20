@@ -16,9 +16,11 @@ export default function Privacy() {
           <p className="eyebrow">Policy</p>
           <h1 className="masthead">Privacy</h1>
           <p>
-            Chicane does not collect, store or transmit any personal data. There is no analytics, no
-            tracking, no advertising identifier and no third-party code in the app. This page explains
-            what that means precisely, because &ldquo;we care about your privacy&rdquo; is not a policy.
+            Chicane collects no personal data. There is no analytics, no tracking, no advertising
+            identifier and no third-party code in the app. The career game sends nothing anywhere at
+            all; the online series sends your races, and nothing that identifies you. This page
+            explains what that means precisely, because &ldquo;we care about your privacy&rdquo; is
+            not a policy.
           </p>
           <p className="updated">Last updated {site.privacyUpdated}</p>
         </div>
@@ -84,11 +86,43 @@ export default function Privacy() {
           including children under 13. There is nothing in the app that could identify a player.
         </p>
 
+        <h2>The online series</h2>
+        <p>
+          If you join the online series, the app creates a random key on your device and keeps it in
+          your iCloud Keychain so your entry follows you between your own devices. Your entry is
+          identified only by a code derived from that key. The series server assigns your team and
+          driver names from the game&apos;s own name lists; nothing you type is sent.
+        </p>
+        <p>
+          When you race a series round the app sends your chosen livery and crest, your race inputs
+          (the setup, the tyre choices and the timeline of your calls), the result, your app version
+          and the round being raced. This is used to compute the standings, to show results on
+          playchicane.com, and to replay your race on the server to confirm the result. It contains
+          no name, email address, device identifier or location.
+        </p>
+        <p>
+          Standings and results are public and are kept as the series&apos; record; race inputs are
+          deleted twelve months after the season ends. Leaving the series from the app deletes your
+          key and race inputs and replaces your entry&apos;s names with &ldquo;Withdrawn
+          entry&rdquo;. The server is hosted on Microsoft Azure, which processes IP addresses to
+          serve requests; the developer keeps a salted hash of the registering address for 30 days
+          to prevent abuse, and nothing else.
+        </p>
+        <p>
+          The career game is unaffected: it needs no connection, sends nothing, and works in
+          aeroplane mode from first launch to the last race of a season.
+        </p>
+
         <h2>This website</h2>
         <p>
-          playchicane.com is a static site. It sets no cookies, runs no analytics, embeds no third-party
-          scripts, and has no forms. Fonts are served from the site&apos;s own domain rather than fetched
-          from a font provider, so loading a page does not tell anyone else that you visited.
+          playchicane.com sets no cookies, runs no analytics, embeds no third-party scripts, and has
+          no forms. Fonts are served from the site&apos;s own domain rather than fetched from a font
+          provider, so loading a page does not tell anyone else that you visited.
+        </p>
+        <p>
+          The series pages show a live season, and they still do not make your browser talk to the
+          series server: the pages are rebuilt on a timer on the server side and delivered to you as
+          ordinary prerendered pages. Nothing about your visit reaches the game&apos;s API.
         </p>
         <p>
           The site is hosted by Vercel, which — like any web host — processes standard server request

@@ -196,3 +196,96 @@ section { padding: 96px 0; }
 .prose strong { color: var(--text); font-weight: 600; }
 .prose ul { padding-left: 22px; }
 .prose > p:first-of-type { font-size: 1.12rem; color: var(--text); }
+
+/* ------------------------------------------------------------ The series */
+
+.series-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-size: 0.95rem;
+}
+.series-table th,
+.series-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  vertical-align: middle;
+}
+.series-table th {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+.series-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.series-table .strong { font-weight: 700; }
+.series-table tr.ghost td { color: var(--text-dim); }
+.series-table .entrant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.series-table .spine {
+  display: inline-block;
+  width: 3px;
+  height: 20px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+.series-table .tag {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+.series-table .tag.verified { color: var(--good); }
+
+.series-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 28px;
+  margin: 18px 0 6px;
+}
+.series-strip div { min-width: 120px; }
+.series-strip dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.series-strip dd {
+  margin: 2px 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.round-list { list-style: none; padding: 0; margin: 14px 0; }
+.round-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.round-list .state {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.round-list .state.open { color: var(--player); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

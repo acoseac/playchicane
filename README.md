@@ -4,20 +4,34 @@ The public website for **Chicane: Racing Manager**, an iOS racing-team managemen
 The game itself lives in a separate repository; this repo is only the marketing site,
 the privacy policy, the support page and the press kit.
 
-Static Next.js, exported to plain files, deployed on Vercel. Pushing to `main` deploys to
-production at [playchicane.com](https://playchicane.com); `vercel deploy --prod` still works if you
-need to ship without a commit.
+Next.js on Vercel. Pushing to `main` deploys to production at
+[playchicane.com](https://playchicane.com); `vercel deploy --prod` still works if you need to ship
+without a commit.
 
 ## Run it
 
 ```
 npm install
 npm run dev          # http://localhost:3000
-npm run build        # static export into ./out
+npm run build        # prerender everything
+
+SERIES_API_URL=http://127.0.0.1:8080 npm run dev    # against a local series server
 ```
 
-There is no server, no database and no API route. `next.config.ts` sets `output: "export"`,
-so `npm run build` produces a directory of files that any static host can serve.
+**No database and no API route**, and the browser never contacts the game's server. Every marketing
+page is prerendered at build time. The series pages under `/series/` are prerendered too and
+regenerated in the background at most every ten minutes from the series API, which is why
+`next.config.ts` no longer sets `output: "export"` — a static export cannot regenerate a page on a
+timer. The visitor always gets a prerendered page; if the API is unwell at revalidation time, the
+last good page keeps being served.
+
+### The series' environment
+
+| Variable | Effect |
+|---|---|
+| `SERIES_API_URL` | Where to read the season from. Defaults to `https://api.playchicane.com`. |
+| `SERIES_UNLISTED=1` | The pages work by URL but carry `noindex`, stay out of the nav and out of the sitemap. **This is the setting while a season is being tested.** Remove it on the day the series opens. |
+| `SERIES_DISABLED=1` | No API calls at all; the series pages say no season is running. |
 
 ## Where things are
 
@@ -28,6 +42,10 @@ so `npm run build` produces a directory of files that any static host can serve.
 | `app/press/` | Press kit — fact sheet, descriptions, downloadable screenshots |
 | `app/support/` | Support and FAQ |
 | `app/privacy/` | Privacy policy |
+| `app/series/` | Same Sky: the season, the standings, and a page per round |
+| `lib/series.ts` | The wire types the series API serves, and the fetches — every one of which may return null |
+| `lib/livery.ts` | The app's livery rule, ported. If one moves, move both. |
+| `components/Crest.tsx` | A port of the app's `CrestView`: the same five shapes and six motifs |
 | `app/og-template/` | Renders the 1200×630 social card. Not linked, `noindex`, excluded from the sitemap. |
 | `lib/site.ts` | The facts the site repeats — support address, platform, URL. Change them here. |
 | `public/screenshots/` | Web-sized WebP, what the pages actually load |

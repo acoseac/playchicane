@@ -24,9 +24,35 @@ const faqs: QA[] = [
     q: "Does it need an internet connection?",
     a: (
       <>
-        No. The whole game runs on your device, including race narration, which uses Apple&apos;s
-        on-device model where the hardware supports it. In aeroplane mode you get the complete game —
-        that is a deliberate rule, not a happy accident.
+        Not for the career. The whole game runs on your device, including race narration, which uses
+        Apple&apos;s on-device model where the hardware supports it. In aeroplane mode you get the
+        complete game — that is a deliberate rule, not a happy accident. The online series needs a
+        connection twice: once to enter, and once per round to take your ticket. Racing itself never
+        does, and the result waits on your device until there is a signal.
+      </>
+    ),
+  },
+  {
+    q: "How are the online series' results checked?",
+    a: (
+      <>
+        Your phone sends the inputs of your weekend — the setup, the tyre choices and the timeline
+        of your calls — not just the result. The server re-runs that weekend with the same
+        simulation and compares what it gets. A result marked <em>verified</em> is one the server
+        reproduced. It is also why cheating buys nothing: the record is the race the server can
+        reproduce, and there are no prizes at any point.
+      </>
+    ),
+  },
+  {
+    q: "Can I move my series entry to a new phone?",
+    a: (
+      <>
+        Usually it moves by itself: your entry is held in your iCloud Keychain, so signing in to the
+        same Apple Account brings it with you. If that is off, or you are moving to a device that
+        does not share it, open <strong>Settings → Online series</strong> before you switch and copy
+        the recovery key. That key is the entry — nobody can reissue it, so write it down somewhere
+        that is not the phone it came from.
       </>
     ),
   },

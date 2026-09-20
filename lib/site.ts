@@ -12,6 +12,6 @@ export const site = {
   privacyEmail: "privacy@playchicane.com",
   platform: "iOS 26 or later",
   developer: "Arsenie Coseac",
-  /** Last substantive edit to the privacy policy. */
-  privacyUpdated: "23 August 2026",
+  /** Last substantive edit to the privacy policy. Move it when the text moves. */
+  privacyUpdated: "20 September 2026",
 } as const;
