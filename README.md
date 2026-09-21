@@ -20,7 +20,7 @@ SERIES_API_URL=http://127.0.0.1:8080 npm run dev    # against a local series ser
 
 **No database and no API route**, and the browser never contacts the game's server. Every marketing
 page is prerendered at build time. The series pages under `/series/` are prerendered too and
-regenerated in the background at most every ten minutes from the series API, which is why
+regenerated in the background at most every minute from the series API, which is why
 `next.config.ts` no longer sets `output: "export"` — a static export cannot regenerate a page on a
 timer. The visitor always gets a prerendered page; if the API is unwell at revalidation time, the
 last good page keeps being served.
@@ -42,10 +42,13 @@ last good page keeps being served.
 | `app/press/` | Press kit — fact sheet, descriptions, downloadable screenshots |
 | `app/support/` | Support and FAQ |
 | `app/privacy/` | Privacy policy |
-| `app/series/` | Same Sky: the season, the standings, and a page per round |
+| `app/series/` | Same Sky: the season, the standings, the entrants, the field, the circuits, and a page per round |
 | `lib/series.ts` | The wire types the series API serves, and the fetches — every one of which may return null |
 | `lib/livery.ts` | The app's livery rule, ported. If one moves, move both. |
 | `components/Crest.tsx` | A port of the app's `CrestView`: the same five shapes and six motifs |
+| `components/Helmet.tsx` | The same idea for a driver's helmet: the app's six patterns, in profile |
+| `components/CircuitMap.tsx` | A circuit drawn from the layout the season publishes — generated shapes, never traced |
+| `components/SeriesNav.tsx` | The series' own sub-navigation. Links and `aria-current`; still no scripts. |
 | `app/og-template/` | Renders the 1200×630 social card. Not linked, `noindex`, excluded from the sitemap. |
 | `lib/site.ts` | The facts the site repeats — support address, platform, URL. Change them here. |
 | `public/screenshots/` | Web-sized WebP, what the pages actually load |
