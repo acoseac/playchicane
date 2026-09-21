@@ -212,6 +212,13 @@ export type RoundReport = {
   round: RoundSpec;
   entries: RoundEntry[];
   reference: RaceResult | null;
+  /**
+   * Who the autopilot's two cars are. They are deliberately absent from the
+   * grid — the grid is the rivals, and the autopilot drives the spec entry —
+   * so without this the reference classification has two rows nothing can
+   * name. Arrives with the race it explains, and is embargoed with it.
+   */
+  referenceIdentity: EntrantIdentity | null;
   serverTime: number;
 };
 
@@ -276,11 +283,40 @@ export const getCircuits = (seriesID: string) =>
 export const getGrid = (seriesID: string) =>
   fetchJSON<SeriesGrid>(`/v1/series/${seriesID}/grid`, 3600);
 
+/**
+ * A driver as a classification row needs them: a name, and the colours of
+ * whoever they drive for. Narrow on purpose — the autopilot's two cars have
+ * to go in here too, and they arrive as an entrant identity rather than a
+ * grid team, so anything wider would mean inventing fields for them.
+ */
+export type NamedDriver = { name: string; teamName: string; liveryHex: string };
+
 /** Every championship driver by id, for pages that only have classifications. */
-export function driverIndex(grid: SeriesGrid | null): Map<string, { name: string; team: GridTeam }> {
-  const index = new Map<string, { name: string; team: GridTeam }>();
+export function driverIndex(grid: SeriesGrid | null): Map<string, NamedDriver> {
+  const index = new Map<string, NamedDriver>();
   for (const team of grid?.teams ?? []) {
-    for (const driver of team.drivers) index.set(driver.driverID, { name: driver.name, team });
+    for (const driver of team.drivers) {
+      index.set(driver.driverID, {
+        name: driver.name,
+        teamName: team.name,
+        liveryHex: team.liveryHex,
+      });
+    }
+  }
+  return index;
+}
+
+/** …and the autopilot's own two, which the round report carries. */
+export function withAutopilot(
+  index: Map<string, NamedDriver>,
+  identity: EntrantIdentity | null | undefined
+): Map<string, NamedDriver> {
+  for (const driver of identity?.drivers ?? []) {
+    index.set(driver.driverID, {
+      name: driver.name,
+      teamName: identity!.teamName,
+      liveryHex: identity!.liveryHex,
+    });
   }
   return index;
 }
