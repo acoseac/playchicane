@@ -297,32 +297,59 @@ section { padding: 96px 0; }
    disclosure the browser opens itself.
    --------------------------------------------------------------- */
 
+/* The series' own navigation, inside the masthead rather than stranded on
+   the rule beneath it — it names the section, so it belongs to the header.
+   The chamfered top-right corner is the app's panel shape (`PanelShape` in
+   Chicane/Design/Comic.swift, which cuts exactly that one corner), and the
+   lettering is the app's display face: the site should look like the thing
+   it is advertising. */
 .series-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 22px;
+  gap: 6px;
+  margin: 30px 0 0;
   padding: 0;
   list-style: none;
 }
 .series-nav a {
+  --cut: 9px;
   display: inline-block;
-  padding: 6px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
+  padding: 8px 15px;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 88, "wght" 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-decoration: none;
   color: var(--text-dim);
   background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--cut)) 0,
+    100% var(--cut),
+    100% 100%,
+    0 100%
+  );
+  transition: color 120ms ease, background 120ms ease;
 }
-.series-nav a:hover { color: var(--text); border-color: var(--accent); }
+.series-nav a:hover {
+  color: var(--text);
+  background: var(--surface-raised);
+  box-shadow: inset 0 0 0 1px rgba(51, 184, 255, 0.55);
+}
 .series-nav a[aria-current="page"] {
   color: var(--bg);
   background: var(--accent);
-  border-color: var(--accent);
-  font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--accent);
+  font-variation-settings: "wdth" 88, "wght" 900;
+  /* Over the rule rather than on it, so the page you are on is joined to the
+     page below — which is what a tab is for. */
+  position: relative;
+  margin-bottom: -1px;
+  padding-bottom: 9px;
 }
+.series-nav a[aria-current="page"]:hover { background: var(--accent); color: var(--bg); }
 
 .tile-grid {
   display: grid;

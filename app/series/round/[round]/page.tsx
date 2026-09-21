@@ -78,8 +78,8 @@ export default async function RoundPage({ params }: { params: Promise<{ round: s
           Round {Number.isFinite(number) ? number : raw}
           {circuit ? ` · ${circuit.name}` : ""}
         </h1>
+        <SeriesNav />
       </header>
-      <SeriesNav />
 
       {!report ? (
         <section className="card">

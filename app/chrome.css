@@ -205,6 +205,15 @@
   background: radial-gradient(700px 380px at 20% 10%, rgba(51, 184, 255, 0.09), transparent 60%), var(--bg);
 }
 .page-head h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); }
+/* A header carrying the section's navigation closes tighter: the tabs are
+   the bottom of it, and 40px under them left the rule floating. */
+.page-head:has(.series-nav) { padding-bottom: 0; border-bottom: 0; }
+/* Accent-tinted, not `--line`: at 1px on this background the neutral rule is
+   invisible, and a tab strip with no strip under it reads as chips floating
+   in the header. */
+.page-head:has(.series-nav) .series-nav {
+  border-bottom: 1px solid rgba(51, 184, 255, 0.28);
+}
 .page-head p { color: var(--text-dim); max-width: 62ch; margin: 18px 0 0; font-size: 1.06rem; }
 .page-head .updated {
   font-family: var(--mono);
