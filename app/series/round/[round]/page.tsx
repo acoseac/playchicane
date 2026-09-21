@@ -15,6 +15,7 @@ import {
   getSchedule,
   seriesEnabled,
   seriesUnlisted,
+  withAutopilot,
   type RoundEntry,
 } from "@/lib/series";
 
@@ -63,7 +64,9 @@ export default async function RoundPage({ params }: { params: Promise<{ round: s
     : [null, null, null];
 
   const circuit = report ? circuitIndex(atlas).get(report.round.trackID) ?? null : null;
-  const drivers = driverIndex(grid);
+  // The grid is the rivals; the autopilot's own two cars come with the race.
+  // One lookup for the table below, whichever a row turns out to be.
+  const drivers = withAutopilot(driverIndex(grid), report?.referenceIdentity);
 
   return (
     <main className="wrap prose" id="main">
@@ -192,14 +195,14 @@ export default async function RoundPage({ params }: { params: Promise<{ round: s
                           <span className="entrant">
                             <span
                               className="spine"
-                              style={{ background: livery(known?.team.liveryHex ?? "9AA0A6") }}
+                              style={{ background: livery(known?.liveryHex ?? "9AA0A6") }}
                               aria-hidden
                             />
                             <span>{known?.name ?? entry.driverID}</span>
                           </span>
                           {entry.status !== "finished" && <span className="tag"> {entry.status}</span>}
                         </td>
-                        <td className="detail">{known?.team.name ?? "—"}</td>
+                        <td className="detail">{known?.teamName ?? "—"}</td>
                       </tr>
                     );
                   })}
