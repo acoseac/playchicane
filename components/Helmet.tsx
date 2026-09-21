@@ -1,17 +1,26 @@
 import type { HelmetDesign } from "@/lib/series";
-import { livery } from "@/lib/livery";
 
 /**
  * A driver's helmet, in profile, facing left.
  *
  * The six patterns are the app's (`HelmetDesign.Pattern` in ChicaneCore), and
  * they exist because they are each readable at marker size — which is exactly
- * the size a table wants. Like the crest this is a port rather than an image:
- * the design is enum values on the wire, and there is no picture to serve.
+ * the size a table wants. Like the crest this is drawn rather than served: the
+ * design is enum values on the wire, and there is no picture to fetch.
+ *
+ * **Not a pixel port, unlike `Crest`.** The app draws a three-quarter view in
+ * a Canvas (`HelmetView` in Chicane/Design/Insignia.swift); this is a simpler
+ * silhouette. What has to agree is the identity — the pattern and the two
+ * colours — and that does.
+ *
+ * **Raw hex, no livery floor.** `HelmetView` uses the authored colours
+ * directly where `CrestView` runs its field through `Color.livery`. Lifting a
+ * dark helmet here would make the same driver a different colour in the two
+ * places, which is the bug that rule exists to avoid, not an instance of it.
  */
 export default function Helmet({ design, size = 22 }: { design: HelmetDesign; size?: number }) {
-  const base = livery(design.baseHex);
-  const accent = livery(design.accentHex);
+  const base = hex(design.baseHex);
+  const accent = hex(design.accentHex);
   const id = `helm-${design.pattern}-${design.baseHex}-${design.accentHex}`.replace(
     /[^a-zA-Z0-9-]/g,
     ""
@@ -42,6 +51,12 @@ export default function Helmet({ design, size = 22 }: { design: HelmetDesign; si
       <path d={SHELL} fill="none" stroke="var(--bg-deep)" strokeWidth="4" />
     </svg>
   );
+}
+
+/** A six-digit hex from the wire, or a neutral if it is not one. */
+function hex(value: string): string {
+  const clean = value.replace(/^#/, "");
+  return /^[0-9a-fA-F]{6}$/.test(clean) ? `#${clean}` : "#9aa0a6";
 }
 
 /** Crown, jaw and chin bar — one closed shape, facing left. */
