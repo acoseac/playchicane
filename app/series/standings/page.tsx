@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeriesNav from "@/components/SeriesNav";
 import { ConstructorsTable, DriversTable } from "@/components/StandingsTable";
 import { formatMoment, getSchedule, getStandings, seriesEnabled, seriesUnlisted } from "@/lib/series";
 
-export const revalidate = 600;
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Standings — Same Sky",
@@ -23,6 +24,7 @@ export default async function StandingsPage() {
         </p>
         <h1 className="masthead">Standings</h1>
       </header>
+      <SeriesNav here="/series/standings/" />
 
       {!standings ? (
         <section className="card">
@@ -45,6 +47,9 @@ export default async function StandingsPage() {
             race time over the counted rounds, then by fewer attempts used, then by entry number.
             The autopilot races every round from the same canonical world and is shown as a
             pace-setter, never as an entrant.
+          </p>
+          <p className="detail">
+            <Link href="/series/entrants/">Every entrant, round by round</Link>.
           </p>
         </>
       )}

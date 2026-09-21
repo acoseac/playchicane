@@ -289,3 +289,178 @@ section { padding: 96px 0; }
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* ---------------------------------------------------------------
+   The series' deeper pages: the atlas, the field, the entrants.
+   All of it is layout and colour — the site still runs no scripts,
+   so "interactive" here means pages that link to each other and a
+   disclosure the browser opens itself.
+   --------------------------------------------------------------- */
+
+.series-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+.series-nav a {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--text-dim);
+  background: var(--surface);
+}
+.series-nav a:hover { color: var(--text); border-color: var(--accent); }
+.series-nav a[aria-current="page"] {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+  margin: 18px 0 26px;
+}
+.tile {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 14px;
+  /* The livery, as a spine down the left. */
+  border-left: 4px solid var(--line);
+}
+.tile h3 {
+  margin: 0 0 2px;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+.tile .where {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.tile .map {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 10px;
+}
+.tile dl {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 3px 10px;
+  margin: 0;
+  font-size: 0.83rem;
+}
+.tile dt { color: var(--text-dim); }
+.tile dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* A 0–1 rating as a bar. Width is the whole of the information. */
+.meter {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+.meter .track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-raised);
+  overflow: hidden;
+}
+.meter .track span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.roster { display: flex; flex-direction: column; gap: 10px; margin: 10px 0 0; }
+.roster-driver {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+.roster-driver .who { display: flex; flex-direction: column; gap: 1px; }
+.roster-driver .who strong { font-weight: 600; }
+.roster-driver .who span { font-size: 0.76rem; color: var(--text-dim); }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+  margin: 18px 0 26px;
+}
+
+.team-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.team-head h3 { margin: 0; }
+.team-head .code {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+details.blurb { margin-top: 10px; }
+details.blurb > summary {
+  cursor: pointer;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+details.blurb > summary:hover { color: var(--accent); }
+details.blurb p { margin: 8px 0 0; font-size: 0.88rem; }
+
+/* Round-by-round points, one cell a round. */
+.season-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.season-line li {
+  min-width: 2.1rem;
+  padding: 4px 0;
+  text-align: center;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  border-radius: 5px;
+  background: var(--surface-raised);
+  color: var(--text-dim);
+}
+.season-line li.scored { background: rgba(51, 184, 255, 0.18); color: var(--text); font-weight: 600; }
+.season-line li .r {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+
+.lede-note {
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}

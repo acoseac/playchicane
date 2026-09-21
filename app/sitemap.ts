@@ -21,7 +21,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   entries.push(
     { url: `${site.url}/series/`, changeFrequency: "daily", priority: 0.9 },
-    { url: `${site.url}/series/standings/`, changeFrequency: "daily", priority: 0.8 }
+    { url: `${site.url}/series/standings/`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${site.url}/series/entrants/`, changeFrequency: "daily", priority: 0.8 },
+    // The field and the atlas are fixed for a season's life.
+    { url: `${site.url}/series/field/`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${site.url}/series/circuits/`, changeFrequency: "monthly", priority: 0.7 }
   );
   const schedule = await getSchedule();
   for (const round of schedule?.rounds ?? []) {
