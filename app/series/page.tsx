@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CircuitMap from "@/components/CircuitMap";
+import Paper from "@/components/Paper";
 import SeriesNav from "@/components/SeriesNav";
 import { ConstructorsTable, DriversTable } from "@/components/StandingsTable";
 import {
   circuitIndex,
   currentRound,
+  getRound,
   formatISO,
   formatMoment,
   getCircuits,
   getSchedule,
   getStandings,
   nextRound,
+  paperOf,
   seriesEnabled,
   seriesUnlisted,
 } from "@/lib/series";
@@ -47,6 +50,14 @@ export default async function SeriesPage() {
   const upcoming = schedule ? nextRound(schedule) : null;
   const circuits = circuitIndex(atlas);
   const here = round ? circuits.get(round.trackID) ?? null : null;
+  // The paper of the last round that closed, which is the most recent thing
+  // the season has to say. The open round has none — it reports the race, and
+  // nobody should read this week's sky here before they have driven it.
+  const lastClosed = schedule
+    ? [...schedule.rounds].reverse().find((r) => r.closesAt <= schedule.serverTime) ?? null
+    : null;
+  const lastReport =
+    schedule && lastClosed ? await getRound(schedule.seriesID, lastClosed.round) : null;
 
   return (
     <main className="wrap prose" id="main">
@@ -138,6 +149,22 @@ export default async function SeriesPage() {
               </p>
             )}
           </section>
+
+          {paperOf(lastReport).length > 0 && (
+            <>
+              <h2>
+                From round {lastClosed!.round}
+                {circuits.get(lastClosed!.trackID) ? `, ${circuits.get(lastClosed!.trackID)!.name}` : ""}
+              </h2>
+              <Paper stories={paperOf(lastReport).slice(0, 3)} />
+              <p className="detail">
+                <Link href={`/series/round/${lastClosed!.round}/`}>
+                  The whole round, and who did what in it
+                </Link>
+                .
+              </p>
+            </>
+          )}
 
           {standings && (
             <>
