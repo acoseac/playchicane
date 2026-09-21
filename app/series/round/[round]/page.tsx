@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CircuitMap from "@/components/CircuitMap";
+import Paper from "@/components/Paper";
 import Meter from "@/components/Meter";
 import SeriesNav from "@/components/SeriesNav";
 import { livery } from "@/lib/livery";
@@ -13,6 +14,7 @@ import {
   getGrid,
   getRound,
   getSchedule,
+  paperOf,
   seriesEnabled,
   seriesUnlisted,
   withAutopilot,
@@ -118,6 +120,13 @@ export default async function RoundPage({ params }: { params: Promise<{ round: s
                 <Link href="/series/circuits/">Every circuit this season</Link>
               </p>
             </article>
+          )}
+
+          {paperOf(report).length > 0 && (
+            <>
+              <h2>The paper</h2>
+              <Paper stories={paperOf(report)} />
+            </>
           )}
 
           <p className="detail">

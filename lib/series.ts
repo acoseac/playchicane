@@ -207,6 +207,18 @@ export type SeriesCircuits = {
   serverTime: number;
 };
 
+/**
+ * One story from a round's paper. Authored in the content pack, filled in
+ * with the round's own facts by the server, and identical for everybody —
+ * which is the point: a solo race is a shared event only if something says so.
+ */
+export type PaperStory = {
+  id: string;
+  slot: string;
+  headline: string;
+  body: string;
+};
+
 export type RoundReport = {
   seriesID: string;
   round: RoundSpec;
@@ -219,6 +231,12 @@ export type RoundReport = {
    * name. Arrives with the race it explains, and is embargoed with it.
    */
   referenceIdentity: EntrantIdentity | null;
+  /**
+   * Empty while the round is open, for the same reason `reference` is — and
+   * absent entirely against a server older than the paper, which is every
+   * moment between the two deploys. Read it through `paperOf`.
+   */
+  paper?: PaperStory[];
   serverTime: number;
 };
 
@@ -290,6 +308,11 @@ export const getGrid = (seriesID: string) =>
  * grid team, so anything wider would mean inventing fields for them.
  */
 export type NamedDriver = { name: string; teamName: string; liveryHex: string };
+
+/** A round's paper, or nothing, whatever the server on the other end knows. */
+export function paperOf(report: RoundReport | null | undefined): PaperStory[] {
+  return report?.paper ?? [];
+}
 
 /** Every championship driver by id, for pages that only have classifications. */
 export function driverIndex(grid: SeriesGrid | null): Map<string, NamedDriver> {
