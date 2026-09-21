@@ -27,8 +27,8 @@ export default async function FieldPage() {
           <Link href="/series/">Same Sky</Link>
         </p>
         <h1 className="masthead">The field</h1>
+        <SeriesNav here="/series/field/" />
       </header>
-      <SeriesNav here="/series/field/" />
 
       {!grid || grid.teams.length === 0 ? (
         <section className="card">

@@ -23,8 +23,8 @@ export default async function StandingsPage() {
           <Link href="/series/">Same Sky</Link>
         </p>
         <h1 className="masthead">Standings</h1>
+        <SeriesNav here="/series/standings/" />
       </header>
-      <SeriesNav here="/series/standings/" />
 
       {!standings ? (
         <section className="card">

@@ -49,8 +49,8 @@ export default async function EntrantsPage() {
           <Link href="/series/">Same Sky</Link>
         </p>
         <h1 className="masthead">The entrants</h1>
+        <SeriesNav here="/series/entrants/" />
       </header>
-      <SeriesNav here="/series/entrants/" />
 
       {listed.length === 0 ? (
         <section className="card">

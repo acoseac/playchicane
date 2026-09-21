@@ -25,8 +25,8 @@ export default async function CircuitsPage() {
           <Link href="/series/">Same Sky</Link>
         </p>
         <h1 className="masthead">The circuits</h1>
+        <SeriesNav here="/series/circuits/" />
       </header>
-      <SeriesNav here="/series/circuits/" />
 
       {!atlas || atlas.circuits.length === 0 ? (
         <section className="card">

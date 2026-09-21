@@ -58,8 +58,8 @@ export default async function SeriesPage() {
           and races it alone, against the same twenty-two cars. What separates the table is what
           you did with it.
         </p>
+        <SeriesNav here="/series/" />
       </header>
-      <SeriesNav here="/series/" />
 
       {!schedule ? (
         <section className="card">
